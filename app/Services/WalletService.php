@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Interfaces\ExternalServicesAdapter;
+use App\Adapters\{ServiceAuthorizingAdapter, ServiceNotificationAdapter};
 use App\Helpers\ValidateData;
 use App\Models\{Transfer, Wallet, User};
 use App\Repository\{TransferRepository, WalletRepository};
@@ -11,14 +13,20 @@ use Illuminate\Support\Facades\DB;
 class WalletService
 {
     private WalletRepository $walletRepository;
+    private ServiceAuthorizingAdapter $serviceAuthorizingAdapter;
+    private ServiceNotificationAdapter $serviceNotificationAdapter;
     private TransferRepository $transferRepository;
 
     public function __construct(
         WalletRepository $walletRepository,
+        ServiceAuthorizingAdapter $serviceAuthorizingAdapter,
+        ServiceNotificationAdapter $serviceNotificationAdapter,
         TransferRepository $transferRepository
     )
     {
         $this->walletRepository = $walletRepository;
+        $this->serviceAuthorizingAdapter = $serviceAuthorizingAdapter;
+        $this->serviceNotificationAdapter = $serviceNotificationAdapter;
         $this->transferRepository = $transferRepository;
     }
 
@@ -63,6 +71,9 @@ class WalletService
             $walletDestiny->save();
 
             $transfer = $this->saveHistoryTransfer($data);
+
+            $this->runExternalServices($this->serviceAuthorizingAdapter);
+            $this->runExternalServices($this->serviceNotificationAdapter);
 
             DB::commit();
             return $transfer;
@@ -118,5 +129,16 @@ class WalletService
     private function saveHistoryTransfer(array $data): Transfer
     {
         return $this->transferRepository->create($data);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function runExternalServices(ExternalServicesAdapter $service): void
+    {
+        $returnService = $service->execute([]);
+        if (! $service->success($returnService)) {
+            throw new Exception("Erro ao realizar tranferência!", 400);
+        }
     }
 }
