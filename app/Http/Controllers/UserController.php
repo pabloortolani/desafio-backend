@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Service\UserService;
+use App\Services\UserService;
 use Exception;
 
 class UserController extends Controller
