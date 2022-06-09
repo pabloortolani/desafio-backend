@@ -3,11 +3,19 @@
 ## Subindo o ambiente local
 
 - Clone o projeto.
-- Crie um arquivo .env na pasta raiz do projeto.
-- Crie um banco de dados local e configure o mesmo no arquivo .env.
-  `DB_DATABASE, DB_USERNAME, DB_PASSWORD`
-- Acrescente as seguintes variáveis no arquivo .env:
-`SERVICE_AUTHORIZING_BASE_URL=https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6`
-`SERVICE_NOTIFY_BASE_URL=http://o4d9z.mocklab.io/notify`
+- Rode os comandos `composer install` e `php artisan key:generate`
+- Renomeie o arquivo `.env.example` para `.env` e altere/crie as seguintes variáveis.
+  * DB_CONNECTION=mysql
+  * DB_HOST=mysql
+  * DB_PORT=3306
+  * DB_DATABASE=desafio_backend
+  * DB_USERNAME=pabloortolani
+  * DB_PASSWORD=123456
+  * SERVICE_AUTHORIZING_BASE_URL=https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6
+  * SERVICE_NOTIFY_BASE_URL=http://o4d9z.mocklab.io/notify
+  * WWWGROUP=1000
+  * WWWUSER=1000
+- Rode o comando `docker-compose up –d`
+- Rode o comando `docker-compose exec api bash` para entrar no container da aplicação.
 - Rode o comando `php artisan migrate` para criar as tabelas necessárias para o sistema funcionar.
 - Rode o comando `php artisan db:seed` para criar os registros necessários na tabela de tipos de usuários.
