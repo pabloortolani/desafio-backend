@@ -2,8 +2,8 @@
 
 ## Subindo o ambiente local
 
-- Clone o projeto.
-- Rode os comandos `composer install` e `php artisan key:generate`
+- Clone o projeto. `git clone https://github.com/pabloortolani/desafio-backend.git --config core.autocrlf=input`
+- Rode os comandos `composer install`
 - Renomeie o arquivo `.env.example` para `.env` e altere/crie as seguintes variáveis.
   * DB_CONNECTION=mysql
   * DB_HOST=mysql
@@ -15,7 +15,8 @@
   * SERVICE_NOTIFY_BASE_URL=http://o4d9z.mocklab.io/notify
   * WWWGROUP=1000
   * WWWUSER=1000
-- Rode o comando `docker-compose up –d`
+- Rode o comando `php artisan key:generate`
+- Rode o comando `docker-compose up -d`
 - Rode o comando `docker-compose exec api bash` para entrar no container da aplicação.
 - Rode o comando `php artisan migrate` para criar as tabelas necessárias para o sistema funcionar.
 - Rode o comando `php artisan db:seed` para criar os registros necessários na tabela de tipos de usuários.

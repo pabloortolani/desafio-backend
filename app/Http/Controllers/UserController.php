@@ -18,7 +18,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         try {
-            return $this->service->createUserAndWallet($request);
+            return response($this->service->createUserAndWallet($request), 201);
         } catch (Exception $e) {
             return response($e->getMessage(), $e->getCode());
         }

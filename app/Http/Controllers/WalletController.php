@@ -18,7 +18,7 @@ class WalletController extends Controller
     public function deposit(WalletDepositRequest $request)
     {
         try {
-            return $this->service->deposit($request->wallet_id, $request->value);
+            return response($this->service->deposit($request->wallet_id, $request->value), 200);
         } catch (Exception $e) {
             return response($e->getMessage(), $e->getCode());
         }
@@ -27,7 +27,7 @@ class WalletController extends Controller
     public function transfer(WalletTransferRequest $request)
     {
         try {
-            return $this->service->transfer($request->toArray());
+            return response($this->service->transfer($request->toArray()), 200);
         } catch (Exception $e) {
             return response($e->getMessage(), $e->getCode());
         }
