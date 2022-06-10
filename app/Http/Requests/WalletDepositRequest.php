@@ -18,4 +18,14 @@ class WalletDepositRequest extends FormRequest
             'value' => 'required|numeric'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'wallet_id.required' => 'Obrigatório informar o ID da carteira',
+            'wallet_id.integer' => 'ID da carteira inválido.',
+            'value.required' => 'Obrigatório informar o valor do depósito.',
+            'value.numeric' => 'Valor de depósito inválido'
+        ];
+    }
 }

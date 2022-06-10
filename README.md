@@ -3,7 +3,7 @@
 ## Subindo o ambiente local
 
 - Clone o projeto. `git clone https://github.com/pabloortolani/desafio-backend.git --config core.autocrlf=input`
-- Rode os comandos `composer install`
+- Rode o comando `composer install`
 - Renomeie o arquivo `.env.example` para `.env` e altere/crie as seguintes variáveis.
   * DB_CONNECTION=mysql
   * DB_HOST=mysql

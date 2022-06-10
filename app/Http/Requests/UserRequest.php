@@ -23,4 +23,18 @@ class UserRequest extends FormRequest
             'password' => 'required|string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Obrigatório informar o nome do usuário.',
+            'name.string' => 'Nome do usuário inválido.',
+            'document.required' => 'Obrigatório informar o CPF ou CNPJ do usuário.',
+            'email.required' => 'Obrigatório informar o e-mail do usuário.',
+            'email.email' => 'E-mail inválido.',
+            'type.required' => 'Obrigatório informar o tipo do usuário.',
+            'type.in' => 'Tipo do usuário inválido.',
+            'password.required' => 'Obrigatório informar uma senha para o usuário.'
+        ];
+    }
 }
