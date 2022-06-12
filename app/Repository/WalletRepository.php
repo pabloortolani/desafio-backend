@@ -6,12 +6,7 @@ use App\Models\Wallet;
 
 class WalletRepository
 {
-    private Wallet $model;
-
-    public function __construct(Wallet $model)
-    {
-        $this->model = $model;
-    }
+    public function __construct(private Wallet $model) {}
 
     public function create(int $userId): Wallet
     {
@@ -20,7 +15,7 @@ class WalletRepository
         ]);
     }
 
-    public function find(int $id):? Wallet
+    public function find(int $id): ?Wallet
     {
         return $this->model->find($id);
     }

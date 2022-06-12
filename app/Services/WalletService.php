@@ -12,23 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class WalletService
 {
-    private WalletRepository $walletRepository;
-    private ServiceAuthorizingAdapter $serviceAuthorizingAdapter;
-    private ServiceNotificationAdapter $serviceNotificationAdapter;
-    private TransferRepository $transferRepository;
-
     public function __construct(
-        WalletRepository $walletRepository,
-        ServiceAuthorizingAdapter $serviceAuthorizingAdapter,
-        ServiceNotificationAdapter $serviceNotificationAdapter,
-        TransferRepository $transferRepository
-    )
-    {
-        $this->walletRepository = $walletRepository;
-        $this->serviceAuthorizingAdapter = $serviceAuthorizingAdapter;
-        $this->serviceNotificationAdapter = $serviceNotificationAdapter;
-        $this->transferRepository = $transferRepository;
-    }
+        private WalletRepository $walletRepository,
+        private ServiceAuthorizingAdapter $serviceAuthorizingAdapter,
+        private ServiceNotificationAdapter $serviceNotificationAdapter,
+        private TransferRepository $transferRepository
+    ) {}
 
     /**
      * @throws Exception

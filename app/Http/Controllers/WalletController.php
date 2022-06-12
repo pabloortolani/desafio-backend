@@ -8,12 +8,7 @@ use App\Services\WalletService;
 
 class WalletController extends Controller
 {
-    private WalletService $service;
-
-    public function __construct(WalletService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(private WalletService $service) {}
 
     public function deposit(WalletDepositRequest $request)
     {

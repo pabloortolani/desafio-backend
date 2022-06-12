@@ -8,12 +8,7 @@ use Exception;
 
 class UserController extends Controller
 {
-    private UserService $service;
-
-    public function __construct(UserService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(private UserService $service) {}
 
     public function store(UserRequest $request)
     {

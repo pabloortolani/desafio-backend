@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class HandleData
 {
-    public static function onlyNumber(?string $value):? string
+    public static function onlyNumber(?string $value): ?string
     {
         if (empty($value)) return null;
 

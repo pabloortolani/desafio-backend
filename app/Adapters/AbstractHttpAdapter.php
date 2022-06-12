@@ -6,12 +6,7 @@ use GuzzleHttp\Client as HttpClient;
 
 abstract class AbstractHttpAdapter
 {
-    protected HttpClient $httpClient;
-
-    public function __construct(HttpClient $httpClient)
-    {
-        $this->httpClient = $httpClient;
-    }
+    public function __construct(protected HttpClient $httpClient) {}
 
     abstract protected function endpoint(): string;
     abstract protected function methodHTTP(): string;

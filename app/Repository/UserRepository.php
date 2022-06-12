@@ -7,12 +7,7 @@ use App\Models\User;
 
 class UserRepository
 {
-    private User $model;
-
-    public function __construct(User $model)
-    {
-        $this->model = $model;
-    }
+    public function __construct(private User $model) {}
 
     public function create(array $data): User
     {
@@ -25,12 +20,12 @@ class UserRepository
         ]);
     }
 
-    public function findByDocument(string $document):? User
+    public function findByDocument(string $document): ?User
     {
         return $this->model->where('document', HandleData::onlyNumber($document))->first();
     }
 
-    public function findByEmail(string $email):? User
+    public function findByEmail(string $email): ?User
     {
         return $this->model->where('email', $email)->first();
     }

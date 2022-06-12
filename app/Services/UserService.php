@@ -11,20 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserService
 {
-    private UserRepository $userRepository;
-    private UserTypesRepository $userTypesRepository;
-    private WalletRepository $walletRepository;
-
     public function __construct(
-        UserRepository $userRepository,
-        UserTypesRepository $userTypesRepository,
-        WalletRepository $walletRepository
-    )
-    {
-        $this->userRepository = $userRepository;
-        $this->userTypesRepository = $userTypesRepository;
-        $this->walletRepository = $walletRepository;
-    }
+        private UserRepository $userRepository,
+        private UserTypesRepository $userTypesRepository,
+        private WalletRepository $walletRepository
+    ) {}
 
     /**
      * @throws Exception

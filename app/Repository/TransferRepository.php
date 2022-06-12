@@ -6,12 +6,7 @@ use App\Models\Transfer;
 
 class TransferRepository
 {
-    private Transfer $model;
-
-    public function __construct(Transfer $model)
-    {
-        $this->model = $model;
-    }
+    public function __construct(private Transfer $model) {}
 
     public function create(array $data): Transfer
     {
