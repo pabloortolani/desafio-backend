@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Helpers\HandleData;
+use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
     public function __construct(private User $model) {}
 

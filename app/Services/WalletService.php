@@ -2,21 +2,20 @@
 
 namespace App\Services;
 
-use App\Interfaces\ExternalServicesAdapter;
+use App\Interfaces\{ExternalServicesAdapter, TransferRepositoryInterface, WalletRepositoryInterface};
 use App\Adapters\{ServiceAuthorizingAdapter, ServiceNotificationAdapter};
 use App\Helpers\ValidateData;
 use App\Models\{Transfer, Wallet, User};
-use App\Repository\{TransferRepository, WalletRepository};
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class WalletService
 {
     public function __construct(
-        private WalletRepository $walletRepository,
+        private WalletRepositoryInterface $walletRepository,
         private ServiceAuthorizingAdapter $serviceAuthorizingAdapter,
         private ServiceNotificationAdapter $serviceNotificationAdapter,
-        private TransferRepository $transferRepository
+        private TransferRepositoryInterface $transferRepository
     ) {}
 
     /**

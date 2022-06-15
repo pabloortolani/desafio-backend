@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Helpers\ValidateData;
+use App\Interfaces\{UserRepositoryInterface, UserTypesRepositoryInterface, WalletRepositoryInterface};
 use App\Models\User;
-use App\Repository\{UserRepository, UserTypesRepository, WalletRepository};
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\DB;
 class UserService
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserTypesRepository $userTypesRepository,
-        private WalletRepository $walletRepository
+        private UserRepositoryInterface $userRepository,
+        private UserTypesRepositoryInterface $userTypesRepository,
+        private WalletRepositoryInterface $walletRepository
     ) {}
 
     /**

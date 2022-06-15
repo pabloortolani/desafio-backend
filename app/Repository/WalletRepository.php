@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Interfaces\WalletRepositoryInterface;
 use App\Models\Wallet;
 
-class WalletRepository
+class WalletRepository implements WalletRepositoryInterface
 {
     public function __construct(private Wallet $model) {}
 

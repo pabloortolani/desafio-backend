@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Interfaces\TransferRepositoryInterface;
 use App\Models\Transfer;
 
-class TransferRepository
+class TransferRepository implements TransferRepositoryInterface
 {
     public function __construct(private Transfer $model) {}
 

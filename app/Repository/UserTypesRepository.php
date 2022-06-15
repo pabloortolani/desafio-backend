@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Interfaces\UserTypesRepositoryInterface;
 use App\Models\UserTypes;
 
-class UserTypesRepository
+class UserTypesRepository implements UserTypesRepositoryInterface
 {
     public function __construct(private UserTypes $model) {}
 
