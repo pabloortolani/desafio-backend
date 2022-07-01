@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Helpers\{StatusReturn, ValidateData};
 use App\Interfaces\{ExternalServicesAdapter, TransferRepositoryInterface, WalletRepositoryInterface};
 use App\Adapters\{ServiceAuthorizingAdapter, ServiceNotificationAdapter};
-use App\Helpers\ValidateData;
 use App\Models\{Transfer, Wallet, User};
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -24,13 +24,13 @@ class WalletService
     public function deposit(int $walletId, float $value): Wallet
     {
         if (! ValidateData::validateFloatGreaterThanZero($value)) {
-            throw new Exception("Valor de depósito inválido!", 400);
+            throw new Exception("Valor de depósito inválido!", StatusReturn::ERROR);
         }
 
         $wallet = $this->walletRepository->find($walletId);
 
         if (empty($wallet)) {
-            throw new Exception("Carteira não encontrada!", 400);
+            throw new Exception("Carteira não encontrada!", StatusReturn::ERROR);
         }
 
         $wallet->balance += $value;
@@ -52,6 +52,8 @@ class WalletService
         try {
             DB::beginTransaction();
 
+            $this->runExternalServices($this->serviceAuthorizingAdapter);
+
             $walletOrigin->balance -= $data['value'];
             $walletOrigin->save();
 
@@ -60,14 +62,13 @@ class WalletService
 
             $transfer = $this->saveHistoryTransfer($data);
 
-            $this->runExternalServices($this->serviceAuthorizingAdapter);
             $this->runExternalServices($this->serviceNotificationAdapter);
 
             DB::commit();
             return $transfer;
         } catch (Exception $e) {
             DB::rollBack();
-            throw new Exception("Erro ao realizar tranferência!", 404);
+            throw new Exception("Erro ao realizar tranferência!", StatusReturn::ERROR);
         }
     }
 
@@ -77,25 +78,25 @@ class WalletService
     private function transferValidations(array $data): array
     {
         if (! ValidateData::validateFloatGreaterThanZero($data['value'])) {
-            throw new Exception("Valor da transferência inválido!", 400);
+            throw new Exception("Valor da transferência inválido!", StatusReturn::ERROR);
         }
 
         $walletOrigin = $this->walletRepository->find($data['wallet_payer']);
         if (! $walletOrigin) {
-            throw new Exception("Carteira pagadora não encontrada!", 400);
+            throw new Exception("Carteira pagadora não encontrada!", StatusReturn::ERROR);
         }
 
         if (! $this->userCanTransfer($walletOrigin)) {
-            throw new Exception("Lojistas não podem realizar transferencias!", 400);
+            throw new Exception("Lojistas não podem realizar transferencias!", StatusReturn::ERROR);
         }
 
         if (! $this->enoughBalanceForTransfer($walletOrigin, $data['value'])) {
-            throw new Exception("Saldo insuficiente para tranferência!", 400);
+            throw new Exception("Saldo insuficiente para tranferência!", StatusReturn::ERROR);
         }
 
         $walletDestiny = $this->walletRepository->find($data['wallet_payee']);
         if (! $walletDestiny) {
-            throw new Exception("Carteira beneficiária não encontrada!", 400);
+            throw new Exception("Carteira beneficiária não encontrada!", StatusReturn::ERROR);
         }
 
         return [
@@ -126,7 +127,7 @@ class WalletService
     {
         $returnService = $service->execute([]);
         if (! $service->success($returnService)) {
-            throw new Exception("Erro ao realizar tranferência!", 400);
+            throw new Exception("Erro ao realizar tranferência!", StatusReturn::ERROR);
         }
     }
 }

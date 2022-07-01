@@ -2,6 +2,7 @@
 
 namespace App\Adapters;
 
+use App\Helpers\StatusReturn;
 use App\Interfaces\ExternalServicesAdapter;
 use Exception;
 
@@ -12,7 +13,7 @@ class ServiceAuthorizingAdapter extends AbstractHttpAdapter implements ExternalS
         $baseUrl = env('SERVICE_AUTHORIZING_BASE_URL');
 
         if (empty($baseUrl)) {
-            throw new Exception('Url de integração não encontrada!');
+            throw new Exception('Url de integração não encontrada!', StatusReturn::ERROR);
         }
 
         return $baseUrl;
