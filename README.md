@@ -46,5 +46,5 @@ https://drive.google.com/file/d/1g8zgo4umbmswtkeI9P_F44ss0wqjNe9C/view?usp=shari
 - Rode o comando `php artisan db:seed` para criar os registros necessários na tabela de tipos de usuários.
 
 ## Executar os testes
-- Rode o comando docker-compose exec api bash para entrar no container da aplicação.
-- Rode o comando php artisan test --filter WalletControllerTest
+- Rode o comando `docker-compose exec api bash` para entrar no container da aplicação.
+- Rode o comando `php artisan test --filter WalletControllerTest`
