@@ -24,6 +24,10 @@ https://drive.google.com/file/d/1g8zgo4umbmswtkeI9P_F44ss0wqjNe9C/view?usp=shari
   * Adapter é um padrão de projeto estrutural que permite objetos com interfaces incompatíveis colaborarem entre si. O Pattern foi usado para criar uma interface padrão de comunicação com os serviços externos.
 - No testes unitários desenvolvido com PHPUnit, foi "mockada" a comunicação com os serviços externos pois não era o objetivo do teste unitário testar a comunicação com os serviços. 
 
+## Melhorias que podem ser aplicadas
+- Serviço externo de notificação pode ser processado em Fila.
+- Cache de consultas no banco de dados que tem sempre o mesmo retorno.
+
 ## Subindo o ambiente local
 
 - Clone o projeto. `git clone https://github.com/pabloortolani/desafio-backend.git --config core.autocrlf=input`
