@@ -30,6 +30,9 @@ https://drive.google.com/file/d/1g8zgo4umbmswtkeI9P_F44ss0wqjNe9C/view?usp=shari
 
 ## Subindo o ambiente local
 
+A api foi desenvolvida utilizando laravel 9 e laravel Sail.
+
+#### Passos
 - Clone o projeto. `git clone https://github.com/pabloortolani/desafio-backend.git --config core.autocrlf=input`
 - Rode o comando `composer install`
 - Renomeie o arquivo `.env.example` para `.env` e altere/crie as seguintes variáveis.
